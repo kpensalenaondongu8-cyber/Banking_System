@@ -1,0 +1,58 @@
+START
+
+send user login or create account message
+if user select login 
+     ask for the users password and number of registration.
+        if credentials match stored password and number
+          send login confirmed message
+else if user selects create account.
+   send user form to fill out number and password wiht full details(first name, middle name, surname)
+   create account for user
+END IF
+
+
+ask user for transaction.
+transfer.
+deposit.
+withdrawal
+
+
+if user select transfer:
+  ask user for receipients account number
+    if account number correct:
+      send user confirmation message to confirm account details
+       if user confirms true:
+         check users acount balance.
+           if users account balance >= transfer:
+              deduct from users account balance.
+              then send user transaction message "succesfull"
+    else:
+      send error message "incorrect acct number"
+END IF
+
+
+else if user select deposit:
+   ask user for ammount to deposit
+        if users entered amount is <= 0:
+            send error message
+        else:     
+            add amount to users account balance
+            send transaction confirmation message
+END IF
+
+
+else if user selects withdraw:
+   ask user for pin
+    if pin matches the stored pin while creating account:
+       ask user for withdrawal amount
+         if users withdrawal amount is > bank account balance of user:
+            send insufficient funds error
+         else withdraw from users bank account balance    
+    else send incorrect pin error message
+    
+END IF
+
+
+
+
+
