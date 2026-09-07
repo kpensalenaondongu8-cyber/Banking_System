@@ -1,20 +1,27 @@
-import json
+from write_read import read
+from write_read import write
+from datetime import datetime
 
-def withdraw(number, password, amount):
+def withdraw(number, pin, amount):
     
-    with open("user.json", "r") as file:
-        details = json.load(file)
+    details = read  
+    now = datetime.now()
+    formatted = now.strftime("%Y-%m-%d %H:%M:%S")
 
-        if number not in details:
-            print("Unregistered number!")
+
+    if number not in details:
+        print("Unregistered number!")
+    else:
+        if pin == details[number]["pin"]:
+            details[number]["balance"] -=amount
+            details[number]["history"].append({
+                "type": "withdraw",
+                "amount": amount,
+                "Date": formatted
+            })
+            print("Success")
+            write(details)     
         else:
-            if password == details[number]["password"]:
-              details[number]["balance"] -=amount
-              print("Success")
-
-              with open("user.json", "w") as file:
-                  json.dump(details, file, indent=4)
-            else:
-                print("Incorrect password")
+            print("Incorrect password")
 
 

@@ -1,8 +1,8 @@
-import json
+from write_read import read
 
 def view_details(number):
-    with open("user.json", "r") as file:
-        details = json.load(file)
+    
+    details = read()
 
     if number in details:
        name1 = details[number]["first_name"]

@@ -1,11 +1,14 @@
-import json
+from write_read import read
 
-def view_balance(logged_in_user):
-    with open("user.json", "r") as file:
-        all_users = json.load(file)
-        
-        if logged_in_user in all_users:
-            user_balance = all_users[logged_in_user]["balance"]
-            print(f"Your current balance is: ₦{user_balance}")
-        else:
+def view_balance(number, password):
+        all_users = read()
+        if number not in all_users:
             print("User not found.")
+        else:
+            if password == all_users[number]["password"]:      
+              user_balance = all_users[number]["balance"]
+              print(f"Your current balance is: ${user_balance}")
+            else:
+                print("incorrect Password!")  
+
+           
