@@ -1,5 +1,7 @@
-from view_balance import view_balance
 from create_acct import create_new
+from login import user_login
+from view_acct_details import view_details
+from deposit import deposit
 
 print("---- Welcome back -----\n 1.Login\n 2.Create Acct\n")
 
@@ -8,10 +10,10 @@ user_input = input("Select access: ")
 while True:
    if user_input == "1":
         user_number = input("Enter Number or Email: ")  
-        user_password = input("Enter Password: ") 
-        print("---- Logged in successfully ----\n")
+        user_password = input("Enter Password: ")
+        user_login(user_number, user_password)
         break  
-        
+           
    elif user_input == "2":
         first_name = input("Enter First name: ")
         middle_name = input("Enter Middle name: ")
@@ -31,11 +33,14 @@ while True:
 print("---- Select Transaction ----\n 1.Deposit.\n 2.Transfer.\n 3.Withdraw.\n 4.View Balance.\n 5.Exit.")        
 
 while True:
-    user = input("Enter Transaction: ")
-    if user == 1:
-        view_balance()
-        continue
+     user_input = input("Enter Transaction: ")
+     if user_input == "1":
+           user_number = input("Enter Number: ")
+           user_amount = input("Enter Amount: ")
+           deposit(user_number, user_amount)
+           continue
 
-
-
-     
+     elif user_input == "":
+               user_number = input("Enter Number: ") 
+     view_details(user_number)
+     continue
