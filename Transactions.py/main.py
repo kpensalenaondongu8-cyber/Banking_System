@@ -2,6 +2,8 @@ from create_acct import create_new
 from login import user_login
 from view_acct_details import view_details
 from deposit import deposit
+from transfer import transfer
+from withdraw import withdraw
 
 print("---- Welcome back -----\n 1.Login\n 2.Create Acct\n")
 
@@ -13,7 +15,7 @@ while True:
         user_password = input("Enter Password: ")
         user_login(user_number, user_password)
         break  
-           
+              
    elif user_input == "2":
         first_name = input("Enter First name: ")
         middle_name = input("Enter Middle name: ")
@@ -36,11 +38,30 @@ while True:
      user_input = input("Enter Transaction: ")
      if user_input == "1":
            user_number = input("Enter Number: ")
-           user_amount = input("Enter Amount: ")
+           try:
+              user_amount = float(input("Enter Amount: "))
+           except ValueError:
+                print("Amount can only be digits")   
            deposit(user_number, user_amount)
            continue
 
-     elif user_input == "":
-               user_number = input("Enter Number: ") 
-     view_details(user_number)
-     continue
+     elif user_input == "2":
+          user_number = input("Enter Your Number: ")
+          acct_number = input("Enter acct_Number: ")
+          try:
+               amount = float(input("Enter amount: "))
+          except ValueError:
+               print("Invalid Syntax!")  
+          user_password = input("Enter Password: ")
+          transfer(user_number, acct_number, amount, user_password)
+          continue  
+
+     elif user_input == "3":
+          user_number = input("Enter number: ")
+          user_password = input("Enter Password: ")
+          try:
+             amount = float(input("Enter Amount: "))
+          except ValueError:
+               print("Invalid Syntax!")
+          withdraw(user_number, user_password, amount)     
+

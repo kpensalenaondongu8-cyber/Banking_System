@@ -9,7 +9,7 @@ def user_login(number, password):
             print("Number Not registered")
         else:                         
             if password == login_details[number]["password"]:
-                print("Login Succesfully")
+                print("--- Welcome ---\nLogin Succesfully")
             else:
                 print("Wrong Password!")           
             

@@ -7,6 +7,8 @@ def deposit (number, amount):
         if number in user_info:
             user_info[number]["balance"] += amount
             print(f"You deposited ${amount} to your acct")
-            json.dump(user_info)
+
+            with open("user.json", "w") as file:
+             json.dump(user_info, file, indent=4)
         else:
             print("Unregistered Number!")
