@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from write_read import read
 from write_read import write

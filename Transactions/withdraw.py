@@ -4,7 +4,7 @@ from datetime import datetime
 
 def withdraw(number, pin, amount):
     
-    details = read  
+    details = read()  
     now = datetime.now()
     formatted = now.strftime("%Y-%m-%d %H:%M:%S")
 

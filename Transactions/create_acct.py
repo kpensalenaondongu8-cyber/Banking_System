@@ -1,20 +1,24 @@
-import json
+import sqlite3
+from werkzeug.security import generate_password_hash
+from write_read import read
+from write_read import write
 
 def create_new(first_name, middle_name, last_name, number, password, pin):
-    with open("user.json", "r") as file:
-        new_user = json.load(file)
-    
+
+    password_hash = generate_password_hash(password)   
+    conn = sqlite3.connect("app.db")
+    cursor = conn.cursor()
     balance = 0
-    history = []
-    new_user[number] = {
-        "first_name": first_name,
-        "middle_name": middle_name,
-        "last_name": last_name,
-        "number": number,
-        "password": password,
-        "balance": balance,
-        "pin": pin,
-        "history": history
-    }
-    with open("user.json", "w") as file:
-        json.dump(new_user, file, indent=4)
+    try:
+        cursor.execute(
+        "INSERT INTO users (first_name, middle_name, last_name, number, password_hash, pin, balance) VALUES (?, ?, ?, ?, ?, ?, ?)",
+          (first_name, middle_name, last_name, number, password_hash, pin, balance) 
+        )
+    except  sqlite3.IntegrityError:
+        print("The number:", number, "is already registered")
+
+    conn.commit()
+    conn.close()
+
+    if __name__ == "__main__":
+       create_new("Thomas", "", "Doe", "08011112222", "mypassword", "1234")
