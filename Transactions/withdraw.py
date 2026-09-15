@@ -1,13 +1,13 @@
-from write_read import read
-from write_read import write
+import sqlite3
 from datetime import datetime
 
 def withdraw(number, pin, amount):
     
-    details = read()  
+    conn = sqlite3.connect("app.db")
+    cursor = conn.cursor()
+
     now = datetime.now()
     formatted = now.strftime("%Y-%m-%d %H:%M:%S")
-
 
     if number not in details:
         print("Unregistered number!")
